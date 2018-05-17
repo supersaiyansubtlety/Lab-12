@@ -1,33 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Resume - Edit</title>
+    <title>Resume - Add</title>
 </head>
 <body>
-<h1>Edit Resume</h1>
-<form action="/resume/update" method="get">
-    <input
-            type="hidden"
-            id="resume_id"
-            name="resume_id"
-            value="<%= resume.resume_id %>"
-    />
-    Resume Name: <input
-            name="resume_name"
-            type="text"
-            value="<%= resume.resume_name %>"
-    />
+<h1>Add New Resume</h1>
+<a href="/resume/all">&#8606 Return to all Resumes</a>
+<br />
+<a href="/resume/add/selectuser">&#8592 Choose different User</a>
+<form action="/resume/insert" method="get">
+    <input type="hidden" name="account_id" id="account_id" value="<%= account_id %>">
+    <% console.log(account_id);
+    console.log(account_id); %>
+    Resume Name: <input type= "text" name="resume_name" />
     <br />
-    Account:
-    <select name="account_id">
-        <%for (var i = 0; i < account.length; i++) {
-            var selected = "";
-            if(account[i].account_id == resume.account_id) {selected="selected"; console.log(selected);} else {console.log(account[i].account_id); console.log(resume.account_id);}
-             %>
-            <option id="<%= account[i].account_id %>" value="<%= account[i].account_id %>" <%= selected %>><%= account[i].first_name + ", " + account[i].last_name %></option>
-        <% } %>
-    </select>
+    Companies
     <br />
+    <%for (var i = 0; i < company.length; i++) { %>
+        <input type="checkbox" name="company_id" value="<%= company[i].company_id %>" >
+            <%= company[i].company_name %>
+        </input>
+        <br />
+    <% } %>
+    <br />
+    Schools
+    <br />
+    <%for (var i = 0; i < school.length; i++) { %>
+        <input type="checkbox" name="school_id" value="<%= school[i].school_id %>">
+            <%= school[i].school_name %>
+        </input>
+        <br />
+    <% } %>
+    <br />
+    Skills
+    <br />
+    <%for (var i = 0; i < skill.length; i++) { %>
+        <input type="checkbox" name="skill_id" value="<%= skill[i].skill_id %>">
+            <%= skill[i].skill_name + " | " + skill[i].description %>
+        </input>
+        <br />
+    <% } %>
     <input type="submit" />
 
 </form>
